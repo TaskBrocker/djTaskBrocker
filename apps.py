@@ -5,10 +5,9 @@ from apscheduler.schedulers.background import BackgroundScheduler
 
 def schedule_api(*args):
     from django.db.models.functions import Now
-    from time import sleep
-    from djSheduler.models import task_log    
+    from djTaskBrocker.models import task_log
     import importlib
-    
+
     print("%%Start 'SHEDULE_APP' moment: " + str(datetime.utcnow().now()))
     print("ID: " + args[0]);
     print("App name: " + args[1]);
@@ -40,8 +39,8 @@ def schedule_api(*args):
 def multitask_schedule(*args):
     print("#1: Start task operation")#Debug
     from django.db.models.functions import Now
-    from djSheduler.models import task_operation
-    from djSheduler.models import task_operation_log    
+    from djTaskBrocker.models import task_operation
+    from djTaskBrocker.models import task_operation_log
     import importlib
     
     print("#2: Get operations")#Debug
@@ -128,8 +127,8 @@ def multitask_schedule(*args):
         print("#5: End operation")#Debug
     
     
-class djShedulerConfig(AppConfig):
-    name = 'djSheduler';
+class djTaskBrockerConfig(AppConfig):
+    name = 'djTaskBrocker';
     test = 'ok ok';
     scheduler = None;
 
@@ -142,7 +141,7 @@ class djShedulerConfig(AppConfig):
             self.scheduler = BackgroundScheduler()
             
             #try:
-            from djSheduler.models import task
+            from djTaskBrocker.models import task
             
             fetchAll = task.objects.all().filter(execute = True);
             

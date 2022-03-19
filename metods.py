@@ -1,6 +1,6 @@
 def appendOperation(idNameTask, inParameters):
-    from djSheduler.models import task
-    from djSheduler.models import task_operation
+    from djTaskBrocker.models import task
+    from djTaskBrocker.models import task_operation
     
     multyTask = task.objects.filter(id_name = idNameTask).first()
     
