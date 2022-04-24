@@ -4,17 +4,18 @@ class task(models.Model):
     TASK_TRIGGER_TYPE_CHOICE = [('interval','interval'),('cron','cron'),('date', 'date')]
     TASK_TYPE_CHOICE = [('simple','simple'),('multy','multy')]
 
-    
+    #uuid = models.CharField(max_length=36, primary_key = True)
+
     name = models.CharField(max_length=150)
     id_name = models.CharField(max_length=50)
     type = models.CharField(choices = TASK_TYPE_CHOICE, max_length=50, null=True, blank=True)
     max_instances = models.IntegerField(null=True, blank=True)
     trigger_type = models.CharField(choices = TASK_TRIGGER_TYPE_CHOICE , max_length=50)
-    
+
     #trigger_type = models.CharField(max_length=50)
     #trigger_interval = models.CharField(max_length=50)
     #trigger_property = models.CharField(max_length=100)
-    
+
     #interval parameters
     #source: https://apscheduler.readthedocs.io/en/3.x/modules/triggers/interval.html?highlight=triggers.interval
     trigger_interval_weeks = models.IntegerField(null=True, blank=True)
@@ -51,7 +52,7 @@ class task(models.Model):
     task_function_name = models.CharField(max_length=100)
     
     execute = models.BooleanField(default = False)
-    
+
 class task_log(models.Model):
     task_id = models.BigIntegerField()  
     moment_start = models.DateTimeField(null=True, blank=True) 
@@ -59,7 +60,8 @@ class task_log(models.Model):
     result_status = models.IntegerField(null=True, blank=True);
     result_status_internal = models.IntegerField(null=True, blank=True);
     message = models.CharField(max_length=250, null=True, blank=True);
-    
+
+'''
 class task_operation(models.Model):
     task_id = models.BigIntegerField()
     parameters = models.CharField(max_length=500, null=True, blank=True);
@@ -85,7 +87,7 @@ class task_operation_log(models.Model):
     result_status_internal = models.IntegerField(null=True, blank=True);
     message = models.CharField(max_length=250, null=True, blank=True);
     message_internal = models.CharField(max_length=250, null=True, blank=True);
-
+'''
 
 '''
 class list(models.Model):
