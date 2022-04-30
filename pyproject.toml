@@ -1,7 +1,6 @@
 [build-system]
 requires = [
-    "apSheduler >= 3.9.0",
-    "django >= x.x.x"
+    "apSheduler >= 3.9.0"
 ]
 build-backend = "setuptools.build_meta"
 
