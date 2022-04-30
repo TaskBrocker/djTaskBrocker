@@ -3,8 +3,28 @@ User guide
 ##########
 
 
-Installing APScheduler
-----------------------
+Installing djTaskBrocker
+========================
+
+Наразі розроблений 1-y метод розгортання
+
+Deploy
+------
+  
+ 
+clone repository
+git clone https://github.com/TaskBrocker/djTaskBrocker.git
+
+
+Connect to Django progect
+-------------------------
+
+
+Testing
+_______
+
+Old
+---
 
 The preferred installation method is by using `pip <http://pypi.python.org/pypi/pip/>`_::
 
