@@ -1,4 +1,4 @@
-Advanced Python Scheduler
+Django Task Brocker
 =========================
 
 .. include:: ../README.rst
@@ -12,9 +12,9 @@ Table of Contents
   :maxdepth: 1
 
   userguide
-  versionhistory
-  migration
-  contributing
-  extending
-  faq
-  py-modindex
+  #versionhistory
+  #migration
+  #contributing
+  #extending
+  #faq
+  #py-modindex
