@@ -12,9 +12,3 @@ Table of Contents
   :maxdepth: 1
 
   userguide
-  #versionhistory
-  #migration
-  #contributing
-  #extending
-  #faq
-  #py-modindex
