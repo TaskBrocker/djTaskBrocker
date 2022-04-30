@@ -1,0 +1,59 @@
+[build-system]
+requires = [
+    "setuptools >= 42",
+    "wheel >= 0.29.0",
+    "setuptools_scm[toml] >= 3.4"
+]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools_scm]
+version_scheme = "post-release"
+local_scheme = "dirty-tag"
+
+[tool.pytest.ini_options]
+addopts = "-rsx --tb=short"
+testpaths = "tests"
+filterwarnings = "always"
+markers = [
+    "external_service: marks tests as requiring some external service",
+]
+
+[tool.coverage.run]
+source = ["apscheduler"]
+
+[tool.coverage.report]
+show_missing = true
+
+[tool.isort]
+src_paths = ["src"]
+skip_gitignore = true
+profile = "black"
+
+[tool.flake8]
+max-line-length = 99
+
+[tool.mypy]
+python_version = "3.10"
+ignore_missing_imports = true
+
+[tool.tox]
+legacy_tox_ini = """
+[tox]
+minversion = 3.7.0
+envlist = py37, py38, py39, py310, py311, pypy3
+skip_missing_interpreters = true
+isolated_build = true
+
+[testenv]
+extras = test
+commands = coverage run -m pytest {posargs}
+
+[testenv:pyright]
+deps = pyright
+commands = pyright --verifytypes apscheduler
+usedevelop = true
+
+[testenv:docs]
+extras = doc
+commands = sphinx-build docs build/sphinx
+"""
