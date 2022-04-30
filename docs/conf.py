@@ -18,9 +18,9 @@ from __future__ import annotations
 
 # -- Project information -----------------------------------------------------
 
-project = "APScheduler"
-copyright = "Alex Grönholm"
-author = "Alex Grönholm"
+project = "djTaskBrocker"
+copyright = "Pullger"
+author = "Kovalenko Konstantin"
 
 
 # -- General configuration ---------------------------------------------------

@@ -1,8 +1,7 @@
 [build-system]
 requires = [
-    "setuptools >= 42",
-    "wheel >= 0.29.0",
-    "setuptools_scm[toml] >= 3.4"
+    "apSheduler >= 3.9.0",
+    "django >= x.x.x"
 ]
 build-backend = "setuptools.build_meta"
 
@@ -19,7 +18,7 @@ markers = [
 ]
 
 [tool.coverage.run]
-source = ["apscheduler"]
+source = ["djTaskBrocker"]
 
 [tool.coverage.report]
 show_missing = true
