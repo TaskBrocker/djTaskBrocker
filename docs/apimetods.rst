@@ -1,6 +1,6 @@
-########
-REST API
-########
+##########
+API METODS
+##########
 
 
 Installing djTaskBrocker
