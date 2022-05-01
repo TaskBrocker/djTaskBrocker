@@ -12,3 +12,5 @@ Table of Contents
   :maxdepth: 1
 
   userguide
+  apirest
+  apimetods
