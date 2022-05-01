@@ -8,15 +8,17 @@ Installing djTaskBrocker
 
 Наразі розроблений 1-y метод розгортання
 
+video: 
+
 Deploy
 ------
-  
  
-clone repository
-git clone https://github.com/TaskBrocker/djTaskBrocker.git
+  clone repository:
+
+$git clone https://github.com/TaskBrocker/djTaskBrocker.git
 
 
-Connect to Django progect
+Connect to Django project
 -------------------------
 
 
