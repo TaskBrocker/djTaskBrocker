@@ -10,14 +10,13 @@ get-list
 
     GET /tb/api/get-list
 
-Example responce:
+**Parameters**:
 
-    **Example response**:
+None
 
-  **Example response**:
+**Example response**:
 
 .. sourcecode:: json
-
 [
     {
         "uuid": "361d0ef4-c663-11ec-a81c-a9552d28665d",
@@ -53,10 +52,24 @@ Example responce:
         "task_function_name": "Print",
         "execute": false
     }
-]
+]:
+
+stop-job-by-name
+================
+
+    POST /tb/api/stop-job-by-name
+
+**Parameters**:
+
+'id_name': String 
+(internal Task name)
+
+
+**Example response**:
+
 
 Reporting bugs
---------------
+==============
 
 .. include:: ../README.rst
    :start-after: Reporting bugs

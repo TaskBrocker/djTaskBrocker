@@ -13,9 +13,10 @@ video:
 Deploy
 ------
  
-  Clone repository:
+  Clone repository::
 
     $ git clone https://github.com/TaskBrocker/djTaskBrocker.git
+
 
 
 Connect to Django project
