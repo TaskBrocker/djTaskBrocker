@@ -14,9 +14,8 @@ get-list
 
 None
 
-**Example response**:
+**Example response**::
 
-.. sourcecode:: json
 [
     {
         "uuid": "361d0ef4-c663-11ec-a81c-a9552d28665d",
@@ -52,7 +51,10 @@ None
         "task_function_name": "Print",
         "execute": false
     }
-]:
+]
+
+
+note:: ttt sdafkasdkfjasdf
 
 stop-job-by-name
 ================
@@ -65,11 +67,34 @@ stop-job-by-name
 (internal Task name)
 
 
+**Example response**::
+
+sdfsdf
+
+**Errors**:
+
+
+start-job-by-name
+================
+
+    POST /tb/api/start-job-by-name
+
+**Parameters**:
+
+'id_name': String 
+(internal Task name)
+
 **Example response**:
+
+
+**Errors**:
 
 
 Reporting bugs
 ==============
+
+
+
 
 .. include:: ../README.rst
    :start-after: Reporting bugs
