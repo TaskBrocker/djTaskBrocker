@@ -3,7 +3,7 @@ from . import views
 
 urlpatterns = [
     #path('', views.getRoutes, name="routes"),
-    path('api', views.TaskView.as_view())
+    path('api/get-list', views.TaskView.as_view())
     #,path('api/create-task', views.CreateTaskView.as_view())
     ,path('api/create-task-interval', views.CreateSimpleTaskIntervalView.as_view())
     #,path('api/create-task-cron', views.CreateSimpleTaskCronView.as_view())

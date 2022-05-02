@@ -309,7 +309,6 @@ def addJob(inUUID):
 
     return resultReturn;
 
-
 def schedule_api(*args):
     from django.db.models.functions import Now
     from djTaskBrocker.models import task_log
@@ -345,7 +344,6 @@ def schedule_api(*args):
     newTask.moment_end = Now();
     newTask.save();
     '''
-
 
 def multitask_schedule(*args):
     print("#1: Start task operation")  # Debug
@@ -435,7 +433,6 @@ def multitask_schedule(*args):
         firstOperation.save();
 
         print("#5: End operation")  # Debug
-
 
 if __name__ == '__main__':
     #test2_operation("");

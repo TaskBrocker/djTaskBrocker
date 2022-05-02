@@ -6,7 +6,7 @@ from django.db.models import signals
 
 class task(models.Model):
     TASK_TRIGGER_TYPE_CHOICE = [('interval','interval'),('cron','cron'),('date', 'date')]
-    TASK_TYPE_CHOICE = [('simple','simple'),('multy','multy')]
+    TASK_TYPE_CHOICE = [('single','single'),('multy','multy')]
 
     uuid = models.CharField(max_length=36, primary_key = True)
 
