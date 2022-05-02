@@ -6,7 +6,7 @@ API REST
 get-list
 ========
 
-Отримуємо список завдань
+Отримуємо список завдань::
 
     GET /tb/api/get-list
 
@@ -14,7 +14,7 @@ get-list
 
 None
 
-**Example response**::
+**Example response**::json:
 
 [
     {
