@@ -15,7 +15,7 @@ get-list
 None
 
 **Example response**
-
+.. json::
 [
     {
         "uuid": "361d0ef4-c663-11ec-a81c-a9552d28665d",
@@ -53,12 +53,11 @@ None
     }
 ]
 
-.. note:: ttt sdafkasdkfjasdf
 
 stop-job-by-name
 ================
 
-Зупиняємо роботу завдання::
+Зупиняємо роботу завдання за ідентифікатором::
 
     POST /tb/api/stop-job-by-name
 
@@ -78,7 +77,27 @@ sdfsdf
 start-job-by-name
 ================
 
+Запуск роботи завдання за ідентифікатором::
+
     POST /tb/api/start-job-by-name
+
+**Parameters**:
+
+'id_name': String 
+(internal Task name)
+
+**Example response**:
+
+
+**Errors**:
+
+
+delete-task-job-by-name
+================
+
+Видалення завдання з бази данних за його ідентифікатором::
+
+    POST /tb/api/delete-task-job-by-name
 
 **Parameters**:
 
