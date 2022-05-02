@@ -10,11 +10,11 @@ get-list
 
     GET /tb/api/get-list
 
-**Parameters**:
+**Parameters**::
 
 None
 
-**Example response**::json:
+**Example response**
 
 [
     {
@@ -53,11 +53,12 @@ None
     }
 ]
 
-
-note:: ttt sdafkasdkfjasdf
+.. note:: ttt sdafkasdkfjasdf
 
 stop-job-by-name
 ================
+
+Зупиняємо роботу завдання::
 
     POST /tb/api/stop-job-by-name
 
