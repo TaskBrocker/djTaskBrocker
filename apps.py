@@ -1,9 +1,6 @@
-import sys
+import os
 from django.apps import AppConfig
 from datetime import datetime
-import os
-#print(os.path.join(os.path.dirname(__file__)))
-#sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'FixedLibs'))
 from apscheduler.schedulers.background import BackgroundScheduler
 from .operations import stopJob
 
@@ -13,10 +10,8 @@ class djTaskBrockerConfig(AppConfig):
     scheduler = None;
 
     def ready(self):
-        #print("start server")
-        
-        if 'runserver' in sys.argv:
-            #print("runing parser")
+        if os.environ.get('RUN_MAIN') == 'true': #Prevent double run
+            print("############runing sheduler##############")
             
             self.scheduler = BackgroundScheduler()
             
