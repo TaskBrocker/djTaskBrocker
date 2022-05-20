@@ -214,7 +214,7 @@ def deleteTask(inUUID):
     else:
         resultReturn = {
             'result': False
-            ,'discription': 'Task on DB not found'
+            ,'discription': 'Task with <uuid>:[' + inUUID + '] on DB not found'
         }
     return resultReturn;
 
