@@ -13,9 +13,20 @@ from rest_framework import generics
 import rest_framework
 
 
+def ReturnResponce(inSerealizer, notError = False, inDiscription = "Unknown ERROR"):
+    if notError == True:
+        return Response(inDiscription, status=rest_framework.status.HTTP_200_OK)
+    else:
+        return Response({
+            'result': 'error',
+            'discription': inDiscription,
+            'InputRequest': inSerealizer.data
+            }, status=rest_framework.status.HTTP_200_OK if notError == True else rest_framework.status.HTTP_400_BAD_REQUEST)
+
+
 class CreateSimpleTaskCronView(APIView):
     serializer_class = serealizers.CreateSimpleTaskCronSerializer;
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def post(self, request, format=None):
         serializer = self.serializer_class(data = request.data)
@@ -25,16 +36,15 @@ class CreateSimpleTaskCronView(APIView):
 
             appendResult = CreateSimpleTaskCron(serializer.data);
             if appendResult['result'] == True:
-                return Response(appendResult['data'], status=rest_framework.status.HTTP_200_OK)
+                return ReturnResponce(serializer, True, appendResult['data'])
             else:
-                return Response({'Error': appendResult['discription']}, status=rest_framework.status.HTTP_400_BAD_REQUEST)
-
+                return ReturnResponce(serializer, False, appendResult['discription'])
         else:
-            return Response({'Bad Request': 'Broken data'}, status=rest_framework.status.HTTP_400_BAD_REQUEST)
+            return ReturnResponce(serializer, False, 'Validation Error')
 
 class StopJobViewByName(APIView):
     serializer_class = serealizers.StopJobByNameSerializer;
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    #permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def post(self, request, format=None):
         serializer = self.serializer_class(data = request.data)
@@ -48,54 +58,38 @@ class StopJobViewByName(APIView):
                     resultRequest = operations.stopJob(taskByName.uuid)
 
                     if resultRequest['result'] == True:
-                        return Response(
-                            {
-                                'result': 'success'
-                                ,'discription':'Task with \id_name\: [' + serializer.data['id_name'] + '] was stopped successful.'
-                            }
-                            , status=rest_framework.status.HTTP_200_OK)
+                        return ReturnResponce(serializer, True, 'Task with \id_name\: [' + serializer.data['id_name'] + '] was stopped successful.')
                     else:
-                        return Response(
-                            {
-                                'result' : 'error'
-                                 ,'discription' : 'Task with \id_name\ : [' + serializer.data['id_name'] + '] was NOT stopped. ' + resultRequest['discription']}
-                            ,status=rest_framework.status.HTTP_400_BAD_REQUEST)
-
+                        return ReturnResponce(serializer, False, 'Task with \id_name\ : [' + serializer.data['id_name'] + '] was NOT stopped. ' + resultRequest['discription'])
                 else:
-                    return Response({'Bad Request': 'No task with "id_name": ' + request.data['id_name']}, status=rest_framework.status.HTTP_400_BAD_REQUEST)
+                    return ReturnResponce(serializer, False, 'No task with "id_name": ' + request.data['id_name'])
             else:
-                return Response({'Bad Request': 'No data in request'}, status=rest_framework.status.HTTP_400_BAD_REQUEST)
+                return ReturnResponce(serializer, False, 'No data in request')
         else:
-            return Response({'Bad Request': 'Broken data'}, status=rest_framework.status.HTTP_400_BAD_REQUEST)
+            return ReturnResponce(serializer, False, 'Validation Error')
 
 
 class StopJobViewByUUID(APIView):
     serializer_class = serealizers.StopJobByUUIDSerializer;
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    #permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def post(self, request, format=None):
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid()
 
-        if 'uuid' in  serializer.data:
+        if 'uuid' in serializer.data:
             resultRequest = operations.stopJob(serializer.data['uuid'])
 
             if resultRequest['result'] == True:
-                return Response({'OK': 'Task with <uuid>: ' + serializer.data['uuid'] + ' stopped.'}, status=rest_framework.status.HTTP_200_OK)
+                return ReturnResponce(serializer, True, 'Task with <uuid>: ' + serializer.data['uuid'] + ' stopped.')
             else:
-                return Response(
-                    {
-                        'result': 'error'
-                        ,
-                        'discription': 'Task with \id_name\ : [' + serializer.data['uuid'] + '] was NOT started. ' +
-                                       resultRequest['discription']}
-                    , status=rest_framework.status.HTTP_400_BAD_REQUEST)
+                return ReturnResponce(serializer, False, 'Task with \id_name\ : [' + serializer.data['uuid'] + '] was NOT started. ' + resultRequest['discription'])
         else:
-            return Response({'Bad Request': 'Broken data'}, status=rest_framework.status.HTTP_400_BAD_REQUEST)
+            return ReturnResponce(serializer, False, 'Validation Error')
 
 class StartJobViewByName(APIView):
     serializer_class = serealizers.StopJobByNameSerializer;
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    #permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def post(self, request, format=None):
         serializer = self.serializer_class(data = request.data)
@@ -110,47 +104,19 @@ class StartJobViewByName(APIView):
                     resultRequest = operations.startJob(taskByName.uuid)
                     
                     if resultRequest['result'] == True:
-                        return Response(
-                            {
-                                'result': 'success'
-                                ,'discription':'Task with \id_name\: [' + serializer.data['id_name'] + '] was started successful.'
-                            }
-                            , status=rest_framework.status.HTTP_200_OK)
+                        return ReturnResponce(serializer, True, 'Task with \id_name\: [' + serializer.data['id_name'] + '] was started successful.')
                     else:
-                        return Response(
-                            {
-                                'result' : 'error'
-                                 ,'discription' : 'Task with \id_name\ : [' + serializer.data['id_name'] + '] was NOT started. ' + resultRequest['discription']}
-                            ,status=rest_framework.status.HTTP_400_BAD_REQUEST)
-
+                        return ReturnResponce(serializer, False, 'Task with \id_name\ : [' + serializer.data['id_name'] + '] was NOT started. ' + resultRequest['discription'])
                 else:
-                    return Response(
-                        {
-                            'result': 'error'
-                            ,'discription': 'No task with "id_name": ' + request.data['id_name']
-                        }
-                        , status=rest_framework.status.HTTP_400_BAD_REQUEST
-                    )
+                    return ReturnResponce(serializer, False, 'No task with "id_name": ' + request.data['id_name'])
             else:
-                return Response(
-                    {
-                        'result': 'error'
-                        , 'discription': 'No data in request'
-                    }
-                    , status=rest_framework.status.HTTP_400_BAD_REQUEST
-                )
+                return ReturnResponce(serializer, False, 'No data in request')
         else:
-            return Response(
-                {
-                    'result': 'error'
-                    ,'discription': 'Broken data'
-                }
-                , status=rest_framework.status.HTTP_400_BAD_REQUEST
-            )
+            return ReturnResponce(serializer, False, 'Validation Error')
 
 class StartJobViewByUUID(APIView):
     serializer_class = serealizers.StopJobByUUIDSerializer;
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    #permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def post(self, request, format=None):
         serializer = self.serializer_class(data=request.data)
@@ -160,33 +126,15 @@ class StartJobViewByUUID(APIView):
             resultRequest = operations.startJob(serializer.data['uuid'])
 
             if resultRequest['result'] == True:
-                return Response(
-                    {
-                    'result': 'success'
-                    ,'discription': 'Task with \id_name\ : [' + serializer.data['uuid'] + '] successfully started.'
-                    }
-                    , status=rest_framework.status.HTTP_200_OK
-                )
+                return ReturnResponce(serializer, True, 'Task with \id_name\ : [' + serializer.data['uuid'] + '] successfully started.')
             else:
-                return Response(
-                    {
-                        'result': 'error'
-                        ,
-                        'discription': 'Task with \id_name\ : [' + serializer.data['uuid'] + '] was NOT started. ' +
-                                       resultRequest['discription']}
-                    , status=rest_framework.status.HTTP_400_BAD_REQUEST)
+                return ReturnResponce(serializer, False, 'Task with \id_name\ : [' + serializer.data['uuid'] + '] was NOT started. ' + resultRequest['discription'])
         else:
-            return Response(
-                {
-                    'result': 'error'
-                    ,'discription': 'Broken data'
-                }
-                , status=rest_framework.status.HTTP_400_BAD_REQUEST
-            )
+            return ReturnResponce(serializer, False, 'Validation Error')
 
 class DeleteTaskViewByName(APIView):
     serializer_class = serealizers.DeleteTaskByNameSerializer;
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    #permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def post(self, request, format=None):
         serializer = self.serializer_class(data=request.data)
@@ -201,49 +149,19 @@ class DeleteTaskViewByName(APIView):
                     resultRequest = operations.deleteTask(taskByName.uuid)
 
                     if resultRequest['result'] == True:
-                        return Response(
-                            {
-                                'result': 'success'
-                                , 'discription': 'Task with \id_name\: [' + serializer.data[
-                                'id_name'] + '] was started successful.'
-                            }
-                            , status=rest_framework.status.HTTP_200_OK)
+                        return ReturnResponce(serializer, True, 'Task with \id_name\: [' + serializer.data['id_name'] + '] was started successful.')
                     else:
-                        return Response(
-                            {
-                                'result': 'error'
-                                , 'discription': 'Task with \id_name\ : [' + serializer.data[
-                                'id_name'] + '] was NOT started. ' + resultRequest['discription']}
-                            , status=rest_framework.status.HTTP_400_BAD_REQUEST)
-
+                        return ReturnResponce(serializer, False, 'Task with \id_name\ : [' + serializer.data['id_name'] + '] was NOT started. ' + resultRequest['discription'])
                 else:
-                    return Response(
-                        {
-                            'result': 'error'
-                            , 'discription': 'No task with "id_name": ' + request.data['id_name']
-                        }
-                        , status=rest_framework.status.HTTP_400_BAD_REQUEST
-                    )
+                    return ReturnResponce(serializer, False, 'No task with "id_name": ' + request.data['id_name'])
             else:
-                return Response(
-                    {
-                        'result': 'error'
-                        , 'discription': 'No data in request'
-                    }
-                    , status=rest_framework.status.HTTP_400_BAD_REQUEST
-                )
+                return ReturnResponce(serializer, False, 'No data in request')
         else:
-            return Response(
-                {
-                    'result': 'error'
-                    ,'discription': 'Broken data'
-                }
-                , status=rest_framework.status.HTTP_400_BAD_REQUEST
-            )
+            return ReturnResponce(serializer, False, 'Validation Error')
 
 class DeleteTaskViewByUUID(APIView):
     serializer_class = serealizers.DeleteTaskByUUIDSerializer;
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    #permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def post(self, request, format=None):
         serializer = self.serializer_class(data=request.data)
@@ -253,34 +171,16 @@ class DeleteTaskViewByUUID(APIView):
             resultRequest = operations.deleteTask(serializer.data['uuid'])
 
             if resultRequest['result'] == True:
-                return Response(
-                    {
-                    'result': 'success'
-                    ,'discription': 'Task with \id_name\ : [' + serializer.data['uuid'] + '] successfully deleted.'
-                    }
-                    , status=rest_framework.status.HTTP_200_OK
-                )
+                return ReturnResponce(serializer, True, 'Success. Task with (uuid) : [' + serializer.data['uuid'] + '] deleted.')
             else:
-                return Response(
-                    {
-                        'result': 'error'
-                        ,
-                        'discription': 'Task with \id_name\ : [' + serializer.data['uuid'] + '] was NOT deleted. ' +
-                                       resultRequest['discription']}
-                    , status=rest_framework.status.HTTP_400_BAD_REQUEST)
+                return ReturnResponce(serializer, False, 'Error. Task with (uuid) : [' + serializer.data['uuid'] + '] was NOT deleted. ' + resultRequest['discription'])
         else:
-            return Response(
-                {
-                    'result': 'error'
-                    ,'discription': 'Broken data'
-                }
-                , status=rest_framework.status.HTTP_400_BAD_REQUEST
-            )
+            return ReturnResponce(serializer, False, 'Validation Error')
 
 
 class CreateSimpleTaskDateView(APIView):
     serializer_class = serealizers.CreateSimpleTaskDateSerializer;
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def post(self, request, format=None):
         serializer = self.serializer_class(data = request.data)
@@ -290,16 +190,16 @@ class CreateSimpleTaskDateView(APIView):
 
             appendResult = CreateSimpleTaskDate(serializer.data);
             if appendResult['result'] == True:
-                return Response(appendResult['data'], status=rest_framework.status.HTTP_200_OK)
+                return ReturnResponce(serializer, True, appendResult['data'])
             else:
-                return Response({'Error': appendResult['discription']}, status=rest_framework.status.HTTP_400_BAD_REQUEST)
+                return ReturnResponce(serializer, False, appendResult['discription'])
 
         else:
-            return Response({'Bad Request': 'Broken data'}, status=rest_framework.status.HTTP_400_BAD_REQUEST)
+            return ReturnResponce(serializer, False, 'Validation Error')
 
 class CreateSimpleTaskIntervalView(APIView):
     serializer_class = serealizers.CreateSimpleTaskIntervalSerializer;
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def post(self, request, format=None):
         serializer = self.serializer_class(data = request.data)
@@ -309,12 +209,11 @@ class CreateSimpleTaskIntervalView(APIView):
 
             appendResult = CreateSimpleTaskInterval(serializer.data);
             if appendResult['result'] == True:
-                return Response(appendResult['data'], status=rest_framework.status.HTTP_200_OK)
+                return ReturnResponce(serializer, True, appendResult['data'])
             else:
-                return Response({'Error': appendResult['discription']}, status=rest_framework.status.HTTP_400_BAD_REQUEST)
-
+                return ReturnResponce(serializer, False, appendResult['discription'])
         else:
-            return Response({'Bad Request': 'Broken data'}, status=rest_framework.status.HTTP_400_BAD_REQUEST)
+            return ReturnResponce(serializer, False, 'Validation Error')
 
 class CreateTaskView(APIView):
     serializer_class = serealizers.CreateTaskSerializer;
@@ -328,12 +227,11 @@ class CreateTaskView(APIView):
 
             appendResult = appendTask(serializer.data);
             if appendResult['result'] == True:
-                return Response(appendResult['data'], status=rest_framework.status.HTTP_200_OK)
+                return ReturnResponce(serializer, True, appendResult['data'])
             else:
-                return Response({'Error': appendResult['discription']}, status=rest_framework.status.HTTP_400_BAD_REQUEST)
-
+                return ReturnResponce(serializer, False, appendResult['discription'])
         else:
-            return Response({'Bad Request': 'Broken data'}, status=rest_framework.status.HTTP_400_BAD_REQUEST)
+            return ReturnResponce(serializer, False, 'Validation Error')
 
 class TaskView(generics.ListAPIView):
     queryset =  task.objects.all()
@@ -345,16 +243,17 @@ class GetTask(APIView):
     lookup_url_kwarg = 'id_name'
 
     def get(self, request, format=None):
+        serializer = self.serializer_class(data = request.data)
         id_name = request.GET.get(self.lookup_url_kwarg)
+
         if id_name != None:
             task_result = task.objects.filter(id_name=id_name)
             if len(task_result) > 0:
                 data = serealizers.TaskSerializer(task_result[0]).data
-                #data['is_host'] = self.request.session.session_key == room[0].host
-                return Response(data, status=rest_framework.status.HTTP_200_OK)
-            return Response({'Room Not Found': 'Invalid task name.'}, status=rest_framework.status.HTTP_404_NOT_FOUND)
-
-        return Response({'Bad Request': 'Code paramater not found in request'}, status=rest_framework.status.HTTP_400_BAD_REQUEST)
+                return ReturnResponce(serializer, True, data)
+            return ReturnResponce(serializer, False, 'Invalid task name.')
+        else:
+            return ReturnResponce(serializer, False, 'Code paramater not found in request')
 
 def getRoutes(request):
 
