@@ -180,20 +180,10 @@ Now you can run project and connect to dashboard::
 
 
 
-Connect to Django project
--------------------------
-
-Connect
-
-Initialization
---------------
-
-Initialization
-
-
 Operations with task
 ====================
 
-test :doc:`apirest`
+Get list REST API: :doc:`apirest#get-list`
+
 
 "...writing...further will be...."
