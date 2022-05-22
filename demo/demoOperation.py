@@ -7,10 +7,17 @@ port = 8000
 def getAPI_ENDPOINT(InMetod):
         return 'http://' + server + ':' + str(port) + '/tb/api/' + InMetod;
 
-if len(sys.argv) == 4:
+parNum = len(sys.argv)
+
+if (parNum == 4) or (parNum == 2):
         method = sys.argv[1]
-        user = sys.argv[2]
-        passwprd = sys.argv[3]
+        if parNum == 4:
+                user = sys.argv[2]
+                passwprd = sys.argv[3]
+        else:
+                user = ""
+                passwprd = ""
+
 
         print('Metod:',method,'User:',user,'Password:',passwprd)
 
@@ -30,11 +37,15 @@ if len(sys.argv) == 4:
                         ,'trigger_interval_minutes': None
                         ,'trigger_interval_seconds': 5
                         ,'task_app_name': "djTaskBrocker"
-                        ,'task_module_name': "Demo.demoSingleReglament"
+                        ,'task_module_name': "demo.demoSingleReglament"
                         ,'task_function_name': "Print"
                         }
 
-                result = requests.post(url=API_ENDPOINT, data=data, auth=(user, passwprd))
+                if parNum == 4:
+                        result = requests.post(url=API_ENDPOINT, data=data, auth=(user, passwprd))
+                else:
+                        result = requests.post(url=API_ENDPOINT, data=data)
+                
                 Information = result.text;
         elif method == 'stopDemo1':
                 # DOC: https://djtaskbrocker.readthedocs.io/en/latest/apirest.html#stop-job-by-name
@@ -43,7 +54,11 @@ if len(sys.argv) == 4:
                 data = {
                         'id_name': "demo_interval",
                         }
-                result = requests.post(url=API_ENDPOINT, data=data, auth=(user, passwprd))
+                if parNum == 4:
+                        result = requests.post(url=API_ENDPOINT, data=data, auth=(user, passwprd))
+                else:
+                        result = requests.post(url=API_ENDPOINT, data=data)
+                
                 Information = result.text;
         elif method == 'startDemo1':
                 # DOC: https://djtaskbrocker.readthedocs.io/en/latest/apirest.html#start-job-by-name
@@ -52,7 +67,13 @@ if len(sys.argv) == 4:
                 data = {
                         'id_name': "demo_interval",
                 }
-                result = requests.post(url=API_ENDPOINT, data=data, auth=(user, passwprd))
+
+                if parNum == 4:
+                        result = requests.post(url=API_ENDPOINT, data=data, auth=(user, passwprd))
+                else:
+                        result = requests.post(url=API_ENDPOINT, data=data)
+
+
                 Information = result.text;
         elif method == 'delDemo1':
                 # DOC: https://djtaskbrocker.readthedocs.io/en/latest/apirest.html#delete-task-job-by-name
@@ -61,7 +82,10 @@ if len(sys.argv) == 4:
                 data = {
                         'id_name': "demo_interval",
                 }
-                result = requests.post(url=API_ENDPOINT, data=data, auth=(user, passwprd))
+                if parNum == 4:
+                        result = requests.post(url=API_ENDPOINT, data=data, auth=(user, passwprd))
+                else:
+                        result = requests.post(url=API_ENDPOINT, data=data)
                 Information = result.text;
         else:
                 Information = 'Error. unknown metod:' + method;
