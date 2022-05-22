@@ -1,9 +1,9 @@
 ##########
-API Django
+API DJANGO
 ##########
 
 
-API METODS
-==========
+API DJANGO METODS
+=================
 
 ..... Writing ..... keep calm .....
