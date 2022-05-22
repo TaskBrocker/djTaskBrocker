@@ -149,9 +149,9 @@ class DeleteTaskViewByName(APIView):
                     resultRequest = operations.deleteTask(taskByName.uuid)
 
                     if resultRequest['result'] == True:
-                        return ReturnResponce(serializer, True, 'Task with \id_name\: [' + serializer.data['id_name'] + '] was started successful.')
+                        return ReturnResponce(serializer, True, 'Task with \id_name\: [' + serializer.data['id_name'] + '] was deleted successful.')
                     else:
-                        return ReturnResponce(serializer, False, 'Task with \id_name\ : [' + serializer.data['id_name'] + '] was NOT started. ' + resultRequest['discription'])
+                        return ReturnResponce(serializer, False, 'Task with \id_name\ : [' + serializer.data['id_name'] + '] was NOT delete: ' + resultRequest['discription'])
                 else:
                     return ReturnResponce(serializer, False, 'No task with "id_name": ' + request.data['id_name'])
             else:
