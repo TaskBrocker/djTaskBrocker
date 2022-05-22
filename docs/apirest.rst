@@ -6,116 +6,114 @@ API REST
 get-list
 ========
 
-Отримуємо список завдань::
+Get full list of existing task::
 
-    GET /tb/api/get-list
+    HTTP: GET /tb/api/get-list
 
 **Parameters**::
 
-None
+    None
 
-**Example response**
-.. json::
-[
-    {
-        "uuid": "361d0ef4-c663-11ec-a81c-a9552d28665d",
-        "id_name": "printData1",
-        "name": "printind data",
-        "type": "single",
-        "max_instances": 1,
-        "trigger_type": "interval",
-        "trigger_interval_weeks": null,
-        "trigger_interval_days": null,
-        "trigger_interval_hours": null,
-        "trigger_interval_minutes": null,
-        "trigger_interval_seconds": 5.0,
-        "task_app_name": "djTaskBrocker",
-        "task_module_name": "testSingleReglament",
-        "task_function_name": "Print",
-        "execute": false
-    },
-    {
-        "uuid": "e9cecc7e-c818-11ec-89d1-b98329cca7c2",
-        "id_name": "demo_interval",
-        "name": "Demo interval",
-        "type": "single",
-        "max_instances": 1,
-        "trigger_type": "interval",
-        "trigger_interval_weeks": null,
-        "trigger_interval_days": null,
-        "trigger_interval_hours": null,
-        "trigger_interval_minutes": null,
-        "trigger_interval_seconds": 5.0,
-        "task_app_name": "djTaskBrocker",
-        "task_module_name": "testSingleReglament",
-        "task_function_name": "Print",
-        "execute": false
-    }
-]
+**Example response**::
+
+    [
+        {
+            "uuid": "361d0ef4-c663-11ec-a81c-a9552d28665d",
+            "id_name": "printData1",
+            "name": "printind data",
+            "type": "single",
+            "max_instances": 1,
+            "trigger_type": "interval",
+            "trigger_interval_weeks": null,
+            "trigger_interval_days": null,
+            "trigger_interval_hours": null,
+            "trigger_interval_minutes": null,
+            "trigger_interval_seconds": 5.0,
+            "task_app_name": "djTaskBrocker",
+            "task_module_name": "testSingleReglament",
+            "task_function_name": "Print",
+            "execute": false
+        },
+        {
+            "uuid": "e9cecc7e-c818-11ec-89d1-b98329cca7c2",
+            "id_name": "demo_interval",
+            "name": "Demo interval",
+            "type": "single",
+            "max_instances": 1,
+            "trigger_type": "interval",
+            "trigger_interval_weeks": null,
+            "trigger_interval_days": null,
+            "trigger_interval_hours": null,
+            "trigger_interval_minutes": null,
+            "trigger_interval_seconds": 5.0,
+            "task_app_name": "djTaskBrocker",
+            "task_module_name": "testSingleReglament",
+            "task_function_name": "Print",
+            "execute": false
+        }
+    ]
 
 
 stop-job-by-name
 ================
 
-Зупиняємо роботу завдання за ідентифікатором::
+Stop executing task::
 
-    POST /tb/api/stop-job-by-name
+    HTTP: POST /tb/api/stop-job-by-name
 
-**Parameters**:
+**Parameters**::
 
-'id_name': String 
-(internal Task name)
+    'id_name': String (internal Task name)
 
 
 **Example response**::
 
-sdfsdf
+    ... writing ... keep calm ...
 
-**Errors**:
+**Errors**::
+
+    ... writing ... keep calm ...
 
 
 start-job-by-name
-================
+=================
 
-Запуск роботи завдання за ідентифікатором::
+Start executing task::
 
-    POST /tb/api/start-job-by-name
+    HTTP: POST /tb/api/start-job-by-name
 
-**Parameters**:
+**Parameters**::
 
-'id_name': String 
-(internal Task name)
+    'id_name': String (internal Task name)
 
-**Example response**:
+**Example response**::
 
+    ... writing ... keep calm ...
 
-**Errors**:
+**Errors**::
+
+    ... writing ... keep calm ...
 
 
 delete-task-job-by-name
-================
+=======================
 
-Видалення завдання з бази данних за його ідентифікатором::
+Delete task from database::
 
-    POST /tb/api/delete-task-job-by-name
+    HTTP: POST /tb/api/delete-task-job-by-name
 
-**Parameters**:
+**Parameters**::
 
-'id_name': String 
-(internal Task name)
+    'id_name': String (internal Task name)
 
-**Example response**:
+**Example response**::
 
+    ... writing ... keep calm ...
 
 **Errors**:
 
-
-Reporting bugs
-==============
+    ... writing ... keep calm ...
 
 
-
-
-.. include:: ../README.rst
-   :start-after: Reporting bugs
-                 --------------
+... writing ... keep calm ...
+=============================
