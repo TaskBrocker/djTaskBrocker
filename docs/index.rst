@@ -1,16 +1,13 @@
 Django Task Brocker
 =========================
 
-.. include:: ../README.rst
-   :end-before: Documentation
-
-
 Table of Contents
 =================
 
 .. toctree::
-  :maxdepth: 1
+  :maxdepth: 2
 
   userguide
+  faq
   apirest
-  apimetods
+  apidjango
