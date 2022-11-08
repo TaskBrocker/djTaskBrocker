@@ -1,4 +1,5 @@
 /migrations/
-/__pycache__/
+__pycache__/
 /demo/__pycache__/
 /docs/html/
+/.idea/
