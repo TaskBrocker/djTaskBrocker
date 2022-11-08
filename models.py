@@ -4,6 +4,7 @@ from django.dispatch import receiver
 from django.db.models import signals
 #from .models import task, task_log
 
+
 class task(models.Model):
     TASK_TRIGGER_TYPE_CHOICE = [('interval','interval'),('cron','cron'),('date', 'date')]
     TASK_TYPE_CHOICE = [('single','single'),('multy','multy')]

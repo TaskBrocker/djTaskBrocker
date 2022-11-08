@@ -314,12 +314,13 @@ def schedule_api(*args):
     from djTaskBrocker.models import task_log
     import importlib
 
-    print("%%Start 'SHEDULE_APP' moment: " + str(datetime.utcnow().now()))
-    print("ID: " + args[0]);
-    print("App name: " + args[1]);
-    print("Module name: " + args[2]);
-    print("Function name: " + args[3]);
-    print("Atribute: ", end="");
+    print("---------------------------")
+    print("Start 'SHEDULE_APP' moment: " + str(datetime.utcnow().now()))
+    print("ID: " + args[0])
+    print("App name: " + args[1])
+    print("Module name: " + args[2])
+    print("Function name: " + args[3])
+    print("Attribute: ", end="")
     print(args[3])
 
     # newTask = task_log(task_id=args[0], moment_start=Now())
@@ -327,7 +328,15 @@ def schedule_api(*args):
 
     operations = importlib.import_module(args[1] + '.' + args[2])
 
-    result = getattr(operations, args[3])(args[4])
+    try:
+        result = getattr(operations, args[3])(args[4])
+    except BaseException as e:
+        print(f"Error on executing TASK: {str(e)}")
+    else:
+        print("Result:")
+        print(str(result))
+    finally:
+        print("---------------------------")
 
     # result = operations.test_operation(args[1]);
 

@@ -4,6 +4,7 @@ from datetime import datetime
 from apscheduler.schedulers.background import BackgroundScheduler
 from .operations import stopJob
 
+
 class djTaskBrockerConfig(AppConfig):
     name = 'djTaskBrocker';
     test = 'ok ok';
