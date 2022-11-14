@@ -1,5 +1,8 @@
 Version history [djTaskBroker]
 
+{0.5.1.0} [djTaskBroker]
+ - refactor REST method names
+
 {0.5.0.0} [djTaskBroker]
  - append event description
  - bring some code PEP8
